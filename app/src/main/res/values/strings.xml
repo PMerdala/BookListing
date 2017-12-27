@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Book Listing</string>
+    <string name="search_title">Wpisz frazę</string>
+    <string name="book_authors_label">Autorzy:</string>
+    <string name="book_title_label">Tytuł:</string>
+    <string name="book_publish_info_label">Wydane:</string>
+    <string name="book_isbn_label">ISBN:</string>
+</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        tools:src="@mipmap/test_book_img" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/book_label_width"
+                android:layout_height="match_parent"
+                android:text="@string/book_authors_label" />
+
+            <TextView
+                android:id="@+id/book_authors"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                tools:text="Marziah Karch" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/book_label_width"
+                android:layout_height="match_parent"
+                android:text="@string/book_title_label" />
+
+            <TextView
+                android:id="@+id/book_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                tools:text="Android for Work, Productivity for Professionals" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/book_label_width"
+                android:layout_height="match_parent"
+                android:text="@string/book_publish_info_label" />
+
+            <TextView
+                android:id="@+id/book_publish_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                tools:text="Apress, 2010-09-01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/book_label_width"
+                android:layout_height="match_parent"
+                android:text="@string/book_isbn_label" />
+
+            <TextView
+                android:id="@+id/isbn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimaryDark"
+                tools:text="9781430230007" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
