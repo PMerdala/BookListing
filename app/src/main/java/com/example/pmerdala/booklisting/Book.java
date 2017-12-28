@@ -1,24 +1,29 @@
 package com.example.pmerdala.booklisting;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by merdala on 2017-12-27.
  */
 
-public class Book implements Serializable {
-    final String id;
-    final String title;
-    final String subtitle;
-    final Iterable<String> authors;
-    final String description;
-    final String imageUrl;
-    final String linkUrl;
-    final String publisher;
-    final Calendar publishedDate;
-    final String isbn13;
-    final String isbn10;
+public class Book implements Serializable, Comparable<Book> {
+    private final String id;
+
+    private final String title;
+    private final String subtitle;
+    private final Collection<String> authors;
+    private final String description;
+    private final String imageUrl;
+    private final String linkUrl;
+    private final String publisher;
+    private final Calendar publishedDate;
+    private final String isbn13;
+    private final String isbn10;
 
     public String getId() {
         return id;
@@ -32,7 +37,7 @@ public class Book implements Serializable {
         return subtitle;
     }
 
-    public Iterable<String> getAuthors() {
+    public Collection<String> getAuthors() {
         return authors;
     }
 
@@ -53,7 +58,7 @@ public class Book implements Serializable {
     }
 
     public Calendar getPublishedDate() {
-        return publishedDate;
+        return (Calendar) publishedDate.clone();
     }
 
     public String getIsbn13() {
@@ -64,17 +69,47 @@ public class Book implements Serializable {
         return isbn10;
     }
 
-    public Book(String id, String title, String subtitle, Iterable<String> authors, String description, String imageUrl, String linkUrl, String publisher, Calendar publishedDate, String isbn13, String isbn10) {
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj==null){
+            return false;
+        }
+        if (!(obj instanceof Book)){
+            return false;
+        }
+        Book book = (Book)obj;
+        return getId().equals(book.getId());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getId()).append(" - ").append(getTitle()).append(", ").append(getSubtitle()).append(", ").append(getAuthors().toString());
+        return sb.toString();
+    }
+
+    public Book(@NonNull String id, @NonNull String title, String subtitle, Collection<String> authors, String description, String imageUrl, String linkUrl, String publisher, Calendar publishedDate, String isbn13, String isbn10) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
-        this.authors = authors;
+        this.authors = Collections.unmodifiableCollection(authors);
         this.description = description;
         this.imageUrl = imageUrl;
         this.linkUrl = linkUrl;
         this.publisher = publisher;
-        this.publishedDate = publishedDate;
+        this.publishedDate = (Calendar) publishedDate.clone();
         this.isbn13 = isbn13;
         this.isbn10 = isbn10;
     }
+
+    @Override
+    public int compareTo(@NonNull Book o) {
+        return getId().compareTo(o.getId());
+    }
+
 }

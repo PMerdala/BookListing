@@ -50,6 +50,8 @@
             android:id="@+id/book_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/book_item_list"></ListView>
+            tools:listitem="@layout/book_item_list"
+            android:dividerHeight="1dp"
+            android:divider="@color/colorPrimary"></ListView>
     </RelativeLayout>
 </LinearLayout>
