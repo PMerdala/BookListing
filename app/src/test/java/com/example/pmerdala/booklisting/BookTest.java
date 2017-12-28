@@ -1,6 +1,6 @@
 package com.example.pmerdala.booklisting;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
@@ -97,6 +97,22 @@ public class BookTest {
         Assert.assertFalse("Expect false Book not equals to String",book.equals("Book"));
 
     }
+    @Test
+    public void testConstructorMinimum(){
+        Book book = new Book("1","test title",null,null,null,null,null,null,null,null,null);
+        assertEquals("1",book.getId());
+        assertEquals("test title",book.getTitle());
+        Assert.assertNull(book.getAuthors());
+        Assert.assertNull(book.getDescription());
+        Assert.assertNull(book.getImageUrl());
+        Assert.assertNull(book.getIsbn10());
+        Assert.assertNull(book.getIsbn13());
+        Assert.assertNull(book.getLinkUrl());
+        Assert.assertNull(book.getPublishedDate());
+        Assert.assertNull(book.getPublisher());
+        Assert.assertNull(book.getSubtitle());
+    }
+
     @Test
     public void testToString() {
         StringBuilder sb = new StringBuilder();

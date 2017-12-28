@@ -3,6 +3,8 @@ package com.example.pmerdala.booklisting;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -58,7 +60,7 @@ public class Book implements Serializable, Comparable<Book> {
     }
 
     public Calendar getPublishedDate() {
-        return (Calendar) publishedDate.clone();
+        return  publishedDate ==null ? null : (Calendar) publishedDate.clone();
     }
 
     public String getIsbn13() {
@@ -68,6 +70,7 @@ public class Book implements Serializable, Comparable<Book> {
     public String getIsbn10() {
         return isbn10;
     }
+
 
     @Override
     public int hashCode() {
@@ -97,12 +100,20 @@ public class Book implements Serializable, Comparable<Book> {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
-        this.authors = Collections.unmodifiableCollection(authors);
+        if (authors!=null) {
+            this.authors = Collections.unmodifiableCollection(authors);
+        }else{
+            this.authors = null;
+        }
         this.description = description;
         this.imageUrl = imageUrl;
         this.linkUrl = linkUrl;
         this.publisher = publisher;
-        this.publishedDate = (Calendar) publishedDate.clone();
+        if(publishedDate!=null) {
+            this.publishedDate = (Calendar) publishedDate.clone();
+        }else{
+            this.publishedDate = null;
+        }
         this.isbn13 = isbn13;
         this.isbn10 = isbn10;
     }
