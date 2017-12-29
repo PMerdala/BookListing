@@ -5,4 +5,9 @@
     <string name="book_title_label">Tytuł:</string>
     <string name="book_publish_info_label">Wydane:</string>
     <string name="book_isbn_label">ISBN:</string>
+    <string name="settings_menu_item">Ustawienia</string>
+    <string name="settings_title">Preferencje</string>
+    <string name="settings_google_api_base_address_label">URL usługi books</string>
+    <string name="settings_google_api_base_address_key" translatable="false">google_base_url</string>
+    <string name="settings_google_api_base_address_default" translatable="false">https://www.googleapis.com/books/v1/volumes</string>
 </resources>

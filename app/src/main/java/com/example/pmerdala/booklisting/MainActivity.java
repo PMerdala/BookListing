@@ -1,9 +1,14 @@
 package com.example.pmerdala.booklisting;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Iterable<Book>>{
 
@@ -20,12 +24,36 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     TextView searchSrcText;
     TextView statusTextView;
     BookListAdaper bookListAdaper;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent settingIntent = new Intent(this,SettingsActivity.class);
+            startActivity(settingIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     ProgressBar progressBar;
     private final static int HIDE_STATUS=0;
     private final static int INIT_STATUS=1;
     private final static int LOADING_STATUS=2;
     private final static int NON_INTERNET_STATUS=3;
     private final static int LOADER_ID = 0;
+
+    private String getGoogleUrlPreference(){
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String url = sharedPrefs.getString(getString(R.string.settings_google_api_base_address_key),getString(R.string.settings_google_api_base_address_default));
+        return url;
+    }
 
     @Override
     public Loader<Iterable<Book>> onCreateLoader(int i, Bundle bundle) {
@@ -36,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (queryString==null){
             return null;
         }
-        return BookFactory.getBookListLoader(this,queryString);
+        String url = getGoogleUrlPreference();
+        return BookFactory.getBookListLoader(this,url,queryString);
     }
 
     @Override

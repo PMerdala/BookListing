@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/settings_title">
+    <EditTextPreference android:defaultValue="@string/settings_google_api_base_address_default"
+        android:inputType="textUri"
+        android:key="@string/settings_google_api_base_address_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_google_api_base_address_label"/>
+
+</PreferenceScreen>
