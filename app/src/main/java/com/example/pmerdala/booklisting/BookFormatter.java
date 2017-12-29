@@ -43,20 +43,13 @@ public class BookFormatter {
         return sb.toString();
     }
 
-    public String getFormatPublishedDate(String format){
-        if (book.getPublishedDate()==null){
-            return null;
-        }
-        DateFormat dateFormat = new SimpleDateFormat(format);
-        return dateFormat.format(book.getPublishedDate().getTime());
-    }
 
     public String getFullPublished(){
         if (book.getPublishedDate()==null && (book.getPublisher()==null || book.getPublisher().isEmpty())){
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        String formatDate = getFormatPublishedDate("yyyy-mm-dd");
+        String formatDate = book.getPublishedDate();
         if (book.getPublisher()!=null && !book.getPublisher().isEmpty()){
             sb.append(book.getPublisher());
             if (formatDate!=null){

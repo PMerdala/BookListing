@@ -25,4 +25,12 @@ public class GoogleJsonBookParserTest implements JsonTestData {
         BookParser<String> parser = new GoogleJsonBookParser();
         List<Book> books = parser.listBookParser(null,null);
     }
+    @Test
+    public void testListBookParserWithOutSubtitle() throws BookParserException{
+        Book bookExpects = BookExampleTestData.getBookWithoutTitle();
+        BookParser<String> parser = new GoogleJsonBookParser();
+        List<Book> books = parser.listBookParser(jsonStringwithoutitem,null);
+        assertEquals(1,books.size());
+        assertEquals(bookExpects,books.get(0));
+    }
 }

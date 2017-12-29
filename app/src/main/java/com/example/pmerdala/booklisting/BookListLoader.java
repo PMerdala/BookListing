@@ -2,9 +2,6 @@ package com.example.pmerdala.booklisting;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.content.Loader;
-
-import java.util.List;
 
 /**
  * Created by PMerd_000 on 2017-12-28.
@@ -17,7 +14,7 @@ public class BookListLoader extends AsyncTaskLoader<Iterable<Book>> {
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        forceLoad();
+//        forceLoad();
     }
 
     @Override

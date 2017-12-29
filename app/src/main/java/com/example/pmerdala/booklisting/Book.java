@@ -1,13 +1,16 @@
 package com.example.pmerdala.booklisting;
 
 import android.support.annotation.NonNull;
+import android.widget.ProgressBar;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 /**
  * Created by merdala on 2017-12-27.
@@ -23,7 +26,7 @@ public class Book implements Serializable, Comparable<Book> {
     private final String imageUrl;
     private final String linkUrl;
     private final String publisher;
-    private final Calendar publishedDate;
+    private final String publishedDateString;
     private final String isbn13;
     private final String isbn10;
 
@@ -59,8 +62,32 @@ public class Book implements Serializable, Comparable<Book> {
         return publisher;
     }
 
-    public Calendar getPublishedDate() {
-        return  publishedDate ==null ? null : (Calendar) publishedDate.clone();
+    private Calendar getCalendar(String dateString,String pattern){
+        if (dateString==null) return null;
+        DateFormat dataParser = new SimpleDateFormat(pattern);
+        Date date = null;
+        try {
+            date = dataParser.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar c =null;
+        if (date!=null) {
+            c = Calendar.getInstance();
+            c.setTime(date);
+        }
+        return c;
+    }
+
+    public Calendar getPublishedCalendar() {
+        if (publishedDateString==null) return null;
+        Calendar c = getCalendar(publishedDateString,"yyyy-mm-dd");
+        if (c == null) c = getCalendar(publishedDateString,"yyyy");
+        return c;
+    }
+
+    public String getPublishedDate() {
+        return  publishedDateString;
     }
 
     public String getIsbn13() {
@@ -96,7 +123,7 @@ public class Book implements Serializable, Comparable<Book> {
         return sb.toString();
     }
 
-    public Book(@NonNull String id, @NonNull String title, String subtitle, Collection<String> authors, String description, String imageUrl, String linkUrl, String publisher, Calendar publishedDate, String isbn13, String isbn10) {
+    public Book(@NonNull String id, @NonNull String title, String subtitle, Collection<String> authors, String description, String imageUrl, String linkUrl, String publisher, String publishedDate, String isbn13, String isbn10) {
         this.id = id;
         this.title = title;
         this.subtitle = subtitle;
@@ -109,11 +136,7 @@ public class Book implements Serializable, Comparable<Book> {
         this.imageUrl = imageUrl;
         this.linkUrl = linkUrl;
         this.publisher = publisher;
-        if(publishedDate!=null) {
-            this.publishedDate = (Calendar) publishedDate.clone();
-        }else{
-            this.publishedDate = null;
-        }
+        this.publishedDateString = publishedDate;
         this.isbn13 = isbn13;
         this.isbn10 = isbn10;
     }

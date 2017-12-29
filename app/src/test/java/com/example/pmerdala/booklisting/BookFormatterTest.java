@@ -37,26 +37,14 @@ public class BookFormatterTest {
         book = new BookFormatter(new Book("1","test title",null,null,null,null,null,null,null,"","isbn10"));
         assertEquals("isbn10",book.getIsbns());
     }
-    @Test
-    public void testGetFormatPublishedDate(){
-        BookFormatter book = new BookFormatter(BookExampleTestData.getBook());
-        assertEquals("2010-09-01",book.getFormatPublishedDate("yyyy-mm-dd"));
-        book = new BookFormatter(new Book("1","test title",null,null,null,null,null,null,null,null,null));
-        Assert.assertNull(book.getFormatPublishedDate("yyyy-mm-dd"));
-        Calendar c = BookExampleTestData.getPublishedDate();
-        c.set(Calendar.YEAR,2022);
-        book = new BookFormatter(new Book("1","test title",null,null,null,null,null,null,c,null,null));
-        assertEquals("2022-09-01",book.getFormatPublishedDate("yyyy-mm-dd"));
-    }
+
     @Test
     public void testGetFullPublished(){
         BookFormatter book = new BookFormatter(BookExampleTestData.getBook());
         assertEquals("Apress, 2010-09-01",book.getFullPublished());
         book = new BookFormatter(new Book("1","test title",null,null,null,null,null,null,null,null,null));
         Assert.assertNull(book.getFullPublished());
-        Calendar c = BookExampleTestData.getPublishedDate();
-        c.set(Calendar.YEAR,2022);
-        book = new BookFormatter(new Book("1","test title",null,null,null,null,null,null,c,null,null));
+        book = new BookFormatter(new Book("1","test title",null,null,null,null,null,null,"2022-09-01",null,null));
         assertEquals("2022-09-01",book.getFullPublished());
         book = new BookFormatter(new Book("1","test title",null,null,null,null,null,"Publisher",null,null,null));
         assertEquals("Publisher",book.getFullPublished());

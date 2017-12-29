@@ -12,7 +12,7 @@ public class BookFactory {
     private final static BookFactory INSTANCE = new BookFactory();
 
     private BookFactory(){
-        bookDataProvider = new GoogleBookDataProvider(new RestServiceRawDataProvider(), new GoogleJsonBookParser(), GOOGLE_BASE_URL, 100);
+        bookDataProvider = new GoogleBookDataProvider(new RestServiceRawDataProvider(), new GoogleJsonBookParser(), GOOGLE_BASE_URL, GoogleBookDataProvider.MAX_FETCH);
     }
 
     public static  BookDataProvider getBookDataProvider(String name){
