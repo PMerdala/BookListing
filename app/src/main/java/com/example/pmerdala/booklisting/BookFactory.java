@@ -7,19 +7,16 @@ import android.content.Context;
  */
 
 public class BookFactory {
-    private static final String GOOGLE_BASE_URL = "https://www.googleapis.com/books/v1/volumes";
-    private final BookDataProvider bookDataProvider;
-    private final static BookFactory INSTANCE = new BookFactory();
+//    private static final String GOOGLE_BASE_URL = "https://www.googleapis.com/books/v1/volumes";
 
     private BookFactory(){
-        bookDataProvider = new GoogleBookDataProvider(new RestServiceRawDataProvider(), new GoogleJsonBookParser(), GOOGLE_BASE_URL, GoogleBookDataProvider.MAX_FETCH);
     }
 
-    public static  BookDataProvider getBookDataProvider(String name){
-        return  INSTANCE.bookDataProvider;
+    public static  BookDataProvider getBookDataProvider(String url){
+        return  new GoogleBookDataProvider(new RestServiceRawDataProvider(), new GoogleJsonBookParser(), url, GoogleBookDataProvider.MAX_FETCH);
     }
 
-    public static BookListLoader getBookListLoader(Context context,String queryString){
-        return new BookListLoader(BookFactory.getBookDataProvider("Google"),context,queryString);
+    public static BookListLoader getBookListLoader(Context context,String url,String queryString){
+        return new BookListLoader(BookFactory.getBookDataProvider(url),context,queryString);
     }
 }
